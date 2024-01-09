@@ -1,0 +1,134 @@
+Cocoacasts | Take Your Swift to the Next Level
+What's New
+Library
+Search
+Search
+Sign In
+A .gitignore for Swift Projects
+A .gitignore for Swift Projects
+by Bart Jacobs in Tools
+
+Swift 5
+
+Xcode 14
+
+iOS 16
+
+I have been using the same .gitignore file for ages, making small changes as my needs changed over the years. In this episode, I walk you through the .gitignore file I use for Swift and Vapor projects.
+
+This is the .gitignore file I use in most of the Swift and Vapor projects I work on. Let me walk you through the file line by line.
+
+.DS_Store
+*.swp
+*~.nib
+DerivedData/
+build/
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+!default.pbxuser
+!default.mode1v3
+!default.mode2v3
+!default.perspectivev3
+xcuserdata
+!xcshareddata
+!xcschemes
+*.moved-aside
+/Pods
+/Carthage
+
+.swiftpm
+/node_modules
+/tmp
+
+.env
+.env.*
+
+**/fastlane/report.xml
+**/fastlane/Preview.html
+**/fastlane/screenshots
+**/fastlane/test_output
+.DS_Store
+I'm sure many developers dislike .DS_Store files with a passion. The macOS operating system uses these files to store custom attributes of a directory. It is unrelated to your code and shouldn't be committed.
+
+*.swp
+If you use Vim, then you may want to add this to your .gitignore file. I'm not sure if this is still true, but Vim creates swap files that have an .swp extension.
+
+*~.nib
+You can ignore this line if you don't use Interface Builder to create the user interface of your application. The tilde, ~, in the file name indicates that these are backup files so they can be ignored.
+
+DerivedData/
+Xcode uses the infamous DerivedData directory to store intermediate build files and other derived artifacts. You can omit this line from your project's .gitignore file if the DerivedData directory isn't located in your repository. That is the default.
+
+build/
+Builds and other artifacts shouldn't be committed. These files are typically stored in a directory with name build.
+
+User Data
+The following lines may no longer apply, depending on which version of Xcode you are using. The files we ignore are tied to the user and that isn't something you want to commit. As a general rule, don't commit data that is tied to the user.
+
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+!default.pbxuser
+!default.mode1v3
+!default.mode2v3
+!default.perspectivev3
+The exclamation mark, !, defines an exception to an ignore rules. For example, we ignore files with extension pbxuser, but we commit default.pbxuser. Xcode loads default.pbxuser unless there is a .pbxuser file for the user (e.g., bart.pbxuser). According to people working at Apple, these files capture the state of Xcode (window size and position, breakpoints, ...).
+
+xcuserdata
+This directory also contains information that is specific to the user using Xcode so it should be ignored.
+
+!xcshareddata and !xcschemes
+There is information you want to share with team members. A fine example of such information is a scheme. That is why we define an exception using the exclamation mark.
+
+*.moved-aside
+When you run into a merge conflict, Xcode creates files with a .moved-aside extension. These can be ignored too.
+
+/Pods and /Carthage
+If you use CocoaPods or Carthage for dependency management, then I recommend ignoring the Pods and Carthage directories.
+
+.swiftpm
+Similar to CocoaPods and Carthage, you can consider ignoring the .swiftpm directory. There is no consensus about this, though. There is an interesting discussion about this directory and whether or not to ignore it on the Swift forums. I typically add it to my project's .gitignore. If you want to play it safe, then you can consider adding .swiftpm/xcode/xcuserdata to ignore information specific to the user.
+
+/node_modules
+This line only applies if your project uses dependencies that are managed by the node package manager. A Vapor project is an example although not every Vapor project uses the node package manager.
+
+/tmp
+If you use a temporary directory for some reason, then it goes without saying that its contents should be ignored.
+
+.env and .env.*
+Files ending in env or a variation of that pattern often contain sensitive information, such as secrets and configuration details. You should never put sensitive information under source control, which is why these files are ignored.
+
+fastlane
+If you use fastlane for automating common tasks, then you may want to ignore the artifacts it generates, such as reports, test output, and screenshots. This is explained in more detail on the fastlane website.
+
+**/fastlane/report.xml
+**/fastlane/Preview.html
+**/fastlane/screenshots
+**/fastlane/test_output
+More
+Each developer has its own preferences. What I outlined in this episode works for me, but your needs may differ. It is important to carefully consider what you commit to your project's repository, though. Keep data specific to the user and sensitive information out of the repository. The same is true for temporary files, such as build artifacts and other derived data.
+
+You might also like ...
+Debugging Applications With Reveal
+Six Command Line Tools For Cocoa Developers
+How To Manage Dependencies With CocoaPods
+20 Indispensable Applications for Programmers
+Write Beautiful Swift With Tailor
+Solutions
+Cocoacasts Plus
+Mentorship
+Resources
+Books
+Swift Patterns
+About
+Cocoacasts
+Testimonials
+GitHub
+Twitter
+Legal
+Privacy Policy
+Terms and Conditions
+© Code Foundry 2016-2023
